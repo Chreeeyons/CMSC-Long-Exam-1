@@ -22,7 +22,7 @@ header {
     font-size: 2rem;
     font-weight: 700;
     padding: 1rem 0;
-    color: #ff0000; 
+    color: #ff0000; /* Ensure the text color is readable against the background image */
     display: flex;
     justify-content: center;
     align-items: center;
