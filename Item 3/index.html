@@ -4,44 +4,154 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Interactive Cooking Guide</title>
-    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8f8f8;
+            text-align: center;
+        }
+        header {
+            background: #007BFF;
+            color: white;
+            padding: 15px;
+        }
+        main {
+            max-width: 600px;
+            margin: 20px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        .step {
+            display: none;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        .step:target {
+            display: block;
+        }
+        .step:focus-within {
+            outline: 2px solid blue;
+        }
+        .controls {
+            margin-top: 10px;
+        }
+        a {
+            text-decoration: none;
+            padding: 8px 12px;
+            background: #007BFF;
+            color: #fff;
+            border-radius: 5px;
+            display: inline-block;
+            margin: 5px;
+        }
+        a:focus {
+            outline: 2px solid #ffcc00;
+        }
+    </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const steps = document.querySelectorAll(".step");
+            let currentIndex = 0;
+            
+            function showStep(index) {
+                if (index >= 0 && index < steps.length) {
+                    window.location.hash = steps[index].id;
+                    currentIndex = index;
+                }
+            }
+            
+            document.addEventListener("keydown", function(event) {
+                if (event.key === "ArrowRight") {
+                    showStep(currentIndex + 1);
+                } else if (event.key === "ArrowLeft") {
+                    showStep(currentIndex - 1);
+                }
+            });
+        });
+    </script>
 </head>
 <body>
     <header>
         <h1>Interactive Cooking Guide</h1>
-        <p>Follow the steps to cook a delicious meal!</p>
     </header>
     <main>
-        <section id="step1" class="step" tabindex="0">
-            <h2>Step 1: Gather Ingredients</h2>
-            <p>Collect all the necessary ingredients for the recipe.</p>
-            <nav>
-                <a href="#step2" class="next">Next</a>
-            </nav>
+        <section id="intro">
+            <h2>Recipe: Salmon Sinigang</h2>
+            <p>A warm and tangy Filipino sour soup made with salmon and vegetables.</p>
+            <a href="#step1">Start Cooking</a>
         </section>
+        
+        <section id="step1" class="step" tabindex="0" aria-hidden="false">
+            <h3>Step 1: Gather Ingredients</h3>
+            <p>2 tablespoon oil</p>
+            <p>3 cloves garlic</p>
+            <p>1 medium onion</p>
+            <p>1 thumb ginger</p>
+            <p>6 pieces tomatoes</p>
+            <p>1 ¼ cup miso paste</p>
+            <p>6-8 cups water</p>
+            <p>1 medium radish</p>
+            <p>3 tablespoon tamarind soup mix</p>
+            <p>1 pound salmon</p>
+            <p>3 pieces long chilis (siling haba)</p>
+            <p>6 pieces okra</p>
+            <p>1 medium eggplant</p>
+            <p>1-2 bunch mustard leaves</p>
+            <p>Salt to taste</p>
+            <div class="controls">
+                <a href="#step2">Next</a>
+            </div>
+        </section>
+        
         <section id="step2" class="step" tabindex="0" aria-hidden="true">
-            <h2>Step 2: Prepare Ingredients</h2>
-            <p>Chop, slice, and measure all the ingredients as needed.</p>
-            <nav>
-                <a href="#step1" class="prev">Previous</a>
-                <a href="#step3" class="next">Next</a>
-            </nav>
+            <h3>Step 2: Saute Aromatics</h3>
+            <p>Heat oil in a large pot, then sauté garlic, onion, and ginger until aromatic. Add chopped tomatoes and cook until softened.</p>
+            <div class="controls">
+                <a href="#step1">Previous</a>
+                <a href="#step3">Next</a>
+            </div>
         </section>
+        
         <section id="step3" class="step" tabindex="0" aria-hidden="true">
-            <h2>Step 3: Cook</h2>
-            <p>Follow the cooking instructions to prepare the meal.</p>
-            <nav>
-                <a href="#step2" class="prev">Previous</a>
-                <a href="#step4" class="next">Next</a>
-            </nav>
+            <h3>Step 3: Add Miso and Broth</h3>
+            <p>Add miso paste and cook for 2 minutes. Pour in water, mix well, and bring to a boil.</p>
+            <div class="controls">
+                <a href="#step2">Previous</a>
+                <a href="#step4">Next</a>
+            </div>
         </section>
+        
         <section id="step4" class="step" tabindex="0" aria-hidden="true">
-            <h2>Step 4: Serve</h2>
-            <p>Plate the meal and serve it to your guests.</p>
-            <nav>
-                <a href="#step3" class="prev">Previous</a>
-                <a href="#step1" class="restart">Restart</a>
-            </nav>
+            <h3>Step 4: Add Vegetables and Seasonings</h3>
+            <p>Add radish and cook until tender. Stir in tamarind soup mix and salt.</p>
+            <div class="controls">
+                <a href="#step3">Previous</a>
+                <a href="#step5">Next</a>
+            </div>
+        </section>
+        
+        <section id="step5" class="step" tabindex="0" aria-hidden="true">
+            <h3>Step 5: Cook the Salmon and Vegetables</h3>
+            <p>Add salmon fillets, okra, eggplant, and long chilis. Gently mix and cook for 5 minutes until fish and vegetables are cooked through.</p>
+            <div class="controls">
+                <a href="#step4">Previous</a>
+                <a href="#step6">Next</a>
+            </div>
+        </section>
+        
+        <section id="step6" class="step" tabindex="0" aria-hidden="true">
+            <h3>Step 6: Add Mustard Leaves and Serve</h3>
+            <p>Stir in mustard leaves, cook for another minute, then remove from heat. Serve and enjoy!</p>
+            <div class="controls">
+                <a href="#step5">Previous</a>
+                <a href="#intro">Restart</a>
+            </div>
         </section>
     </main>
 </body>
