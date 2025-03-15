@@ -60,26 +60,39 @@
         }
     </style>
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const steps = document.querySelectorAll(".step");
-            let currentIndex = 0;
-            
-            function showStep(index) {
-                if (index >= 0 && index < steps.length) {
-                    window.location.hash = steps[index].id;
-                    currentIndex = index;
-                }
+    document.addEventListener("DOMContentLoaded", function() {
+        function toggleIntro() {
+            const intro = document.getElementById("intro");
+            if (window.location.hash && window.location.hash !== "#intro") {
+                intro.style.display = "none";
+            } else {
+                intro.style.display = "block";
             }
-            
-            document.addEventListener("keydown", function(event) {
-                if (event.key === "ArrowRight") {
-                    showStep(currentIndex + 1);
-                } else if (event.key === "ArrowLeft") {
-                    showStep(currentIndex - 1);
+        }
+
+        window.addEventListener("hashchange", toggleIntro);
+        toggleIntro();
+
+        // Keyboard navigation
+        document.addEventListener("keydown", function(event) {
+            const steps = ["intro", "step1", "step2", "step3", "step4", "step5", "step6", "final", "nutrition"];
+            const currentHash = window.location.hash.substring(1);
+            let currentIndex = steps.indexOf(currentHash);
+
+            if (event.key === "ArrowRight") {
+                if (currentIndex < steps.length - 1) {
+                    window.location.hash = `#${steps[currentIndex + 1]}`;
+                } else {
+                    // If at the last step, restart to #intro
+                    window.location.hash = "#intro";
                 }
-            });
+            } else if (event.key === "ArrowLeft" && currentIndex > 0) {
+                window.location.hash = `#${steps[currentIndex - 1]}`;
+            }
         });
-    </script>
+    });
+</script>
+
 </head>
 <body>
     <header>
@@ -156,9 +169,40 @@
             <p>Stir in mustard leaves, cook for another minute, then remove from heat. Serve and enjoy!</p>
             <div class="controls">
                 <a href="#step5">Previous</a>
-                <a href="#intro">Restart</a>
+                <a href="#final">Final Output</a>
             </div>
         </section>
-    </main>
+        
+        <section id="final" class="step" tabindex="0" aria-hidden="true">
+            <h3>Final Output</h3>
+            <p>Your Salmon Sinigang is ready to be served! Enjoy your meal!</p>
+            <img src="../assets/sinigang.jpg" alt="Final Dish" style="width:100%; height:auto;">
+            <div class="controls">
+                <a href="#nutrition">Nutrition</a>
+            </div>
+        </section>
+
+        <section id="nutrition" class="step" tabindex="0" aria-hidden="true">
+           <h3>Nutrition Facts</h3>
+            <p><strong>Calories:</strong> 318KCAL</p>
+            <p><strong>Carbohydrates:</strong> 27G</p>
+            <p><strong>Protein:</strong> 24G</p>
+            <p><strong>Fat:</strong> 13G</p>
+            <p><strong>Saturated Fat:</strong> 2G</p>
+            <p><strong>Polyunsaturated Fat:</strong> 5G</p>
+            <p><strong>Monounsaturated Fat:</strong> 5G</p>
+            <p><strong>Trans Fat:</strong> 0.02G</p>
+            <p><strong>Cholesterol:</strong> 42MG</p>
+            <p><strong>Sodium:</strong> 2311MG</p>
+            <p><strong>Potassium:</strong> 764MG</p>
+            <p><strong>Fiber:</strong> 6G</p>
+            <p><strong>Sugar:</strong> 10G</p>
+            <p><strong>Vitamin A:</strong> 124IU</p>
+            <p><strong>Vitamin C:</strong> 4MG</p>
+            <p><strong>Calcium:</strong> 72MG</p>
+            <p><strong>Iron:</strong> 3MG</p>
+            <div class="controls">
+                <a href="#intro">Restart</a>
+    </main>    
 </body>
 </html>
