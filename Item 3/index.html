@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Cooking Guide</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Interactive Cooking Guide</h1>
+        <p>Follow the steps to cook a delicious meal!</p>
+    </header>
+    <main>
+        <section id="step1" class="step" tabindex="0">
+            <h2>Step 1: Gather Ingredients</h2>
+            <p>Collect all the necessary ingredients for the recipe.</p>
+            <nav>
+                <a href="#step2" class="next">Next</a>
+            </nav>
+        </section>
+        <section id="step2" class="step" tabindex="0" aria-hidden="true">
+            <h2>Step 2: Prepare Ingredients</h2>
+            <p>Chop, slice, and measure all the ingredients as needed.</p>
+            <nav>
+                <a href="#step1" class="prev">Previous</a>
+                <a href="#step3" class="next">Next</a>
+            </nav>
+        </section>
+        <section id="step3" class="step" tabindex="0" aria-hidden="true">
+            <h2>Step 3: Cook</h2>
+            <p>Follow the cooking instructions to prepare the meal.</p>
+            <nav>
+                <a href="#step2" class="prev">Previous</a>
+                <a href="#step4" class="next">Next</a>
+            </nav>
+        </section>
+        <section id="step4" class="step" tabindex="0" aria-hidden="true">
+            <h2>Step 4: Serve</h2>
+            <p>Plate the meal and serve it to your guests.</p>
+            <nav>
+                <a href="#step3" class="prev">Previous</a>
+                <a href="#step1" class="restart">Restart</a>
+            </nav>
+        </section>
+    </main>
+</body>
+</html>
